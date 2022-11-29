@@ -1,9 +1,20 @@
 const express = require('express');
-const product = require('./api/product');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+const root = require('./api/index');
+const signUp = require('./api/sign-up');
+
 const app = express();
 
 const PORT = process.env.PORT || 5050;
 
-app.use("/api/product", product);
+app.use(cors());
+
+// Configuring body parser middleware
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+app.use("/api", root);
+app.use("/api/sign-up", signUp);
 
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
