@@ -16,6 +16,7 @@ router.post('/', async (request, response) => {
       status: 200,
       message: "Register Account Succesfully",
     });
+    auth.signOut();
   } catch (error) {
     response.json({
       error: true,

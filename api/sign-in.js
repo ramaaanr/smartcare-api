@@ -17,8 +17,10 @@ router.post('/', async (request, response) => {
       message: "Login to Account Succesfully",
       data: {
         id: user.uid,
+        email: user.email,
       },
     });
+    auth.signOut();
   } catch (error) {
     response.json({
       error: true,
