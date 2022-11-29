@@ -1,0 +1,53 @@
+{
+  "name": "smartcare-authentication",
+  "version": "1.0.0",
+  "description": "Authentication for SmartCare App",
+  "main": "./src/index.js",
+  "engines": {
+    "node": "14.x"
+  },
+  "scripts": {
+    "test": "jest",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ramaaanr/smartcare-authentication.git"
+  },
+  "jest": {
+    "maxConcurrency": 2,
+    "verbose": true,
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "collectCoverage": true,
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!vendor/**/*.{js,jsx}"
+    ]
+  },
+  "author": "c22-179",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ramaaanr/smartcare-authentication/issues"
+  },
+  "homepage": "https://github.com/ramaaanr/smartcare-authentication#readme",
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.19.6",
+    "@babel/preset-env": "^7.20.2",
+    "babel-jest": "^29.3.1",
+    "jest": "^29.3.1",
+    "supertest": "^6.3.1"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
