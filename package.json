@@ -2,7 +2,7 @@
   "name": "smartcare-authentication",
   "version": "1.0.0",
   "description": "Authentication for SmartCare App",
-  "main": "./index.js",
+  "main": "index.js",
   "engines": {
     "node": "14.x"
   },
