@@ -2,13 +2,13 @@
   "name": "smartcare-authentication",
   "version": "1.0.0",
   "description": "Authentication for SmartCare App",
-  "main": "./src/index.js",
+  "main": "./index.js",
   "engines": {
     "node": "14.x"
   },
   "scripts": {
     "test": "jest",
-    "start": "node src/index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
