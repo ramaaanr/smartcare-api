@@ -1,33 +1,38 @@
 const express = require('express');
+const signInHandler = require('../helper/sign-in-handler');
 const router = express.Router();
-const { initializeApp } = require('firebase/app');
-const { getAuth, signInWithEmailAndPassword } = require('firebase/auth');
-const firebaseConfig = require('../config/firebase-config');
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 
 router.post('/', async (request, response) => {
-  try {
-    const { email, password } = request.body;
-    const { user } = await signInWithEmailAndPassword(auth, email, password);
+  const { email, password } = request.body;
+  if(!email || !password) {
     response.json({
-      error: false,
-      status: 200,
-      message: "Login to Account Succesfully",
-      data: {
-        id: user.uid,
-        email: user.email,
-      },
-    });
-    auth.signOut();
-  } catch (error) {
+      error: true,
+      status: 403,
+      message: "invalid input, email or password still empty"
+    })
+    return;
+  }
+
+  const signInResponse = await signInHandler(email, password);
+
+  if (signInResponse.error) {
     response.json({
       error: true,
       status: 401,
-      message: error.message
-    });
+      message: signInResponse.message
+    })
+    return;
   }
+
+  response.json({
+    error: false,
+    status: 200,
+    message: "Login to your account succesfully",
+    data: signInResponse.data,
+  })
+
+  return;
 });
+
 
 module.exports = router;

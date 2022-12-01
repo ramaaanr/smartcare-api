@@ -1,29 +1,36 @@
 const express = require('express');
 const router = express.Router();
-const { initializeApp } = require('firebase/app');
-const { getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
-const firebaseConfig = require('../config/firebase-config');
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const signUpHandler = require('../helper/sign-up-handler');
 
 router.post('/', async (request, response) => {
-  try {
-    const { email, password } = request.body;
-    await createUserWithEmailAndPassword(auth, email, password);
+  const { username, email, password } = request.body;
+  if(!email || !password || !username) {
     response.json({
-      error: false,
-      status: 200,
-      message: "Register Account Succesfully",
-    });
-    auth.signOut();
-  } catch (error) {
+      error: true,
+      status: 403,
+      message: "invalid input, email or password or username are still empty"
+    })
+    return;
+  }
+
+  const signUpResponse = await signUpHandler(username, email, password);
+
+  if (signUpResponse.error) {
     response.json({
       error: true,
       status: 401,
-      message: error.message
-    });
+      message: signUpResponse.message
+    })
+    return;
   }
+
+  response.json({
+    error: false,
+    status: 200,
+    message: "Create your account succesfully",
+  })
+
+  return;
 });
 
 module.exports = router;
