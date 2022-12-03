@@ -1,7 +1,6 @@
 const { createUserWithEmailAndPassword, updateProfile } = require('firebase/auth');
 const authentication = require('./authentication');
-const setUser = require('./set-user');
-
+const { setUser } = require('./user-handler');
 
 const signUpHandler = async (username, email, password) => {
   try {
