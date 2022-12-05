@@ -14,6 +14,7 @@ router.get('/:id', async (request, response) => {
       })
     }
     return response.json({
+      error: false,
       status: 200,
       message: "Get user succesfully",
       data: userResponse.data,
@@ -37,6 +38,7 @@ router.put('/add-child/:id', async (request, response) => {
       })
     }
     return response.json({
+      error: false,
       status: 200,
       message: "Update user child succesfully",
       data: userResponse.data,
@@ -60,6 +62,7 @@ router.put('/remove-child/:id', async (request, response) => {
       })
     }
     return response.json({
+      error: false,
       status: 200,
       message: "Remove user child succesfully",
       data: userResponse.data,

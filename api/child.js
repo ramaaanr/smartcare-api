@@ -14,6 +14,7 @@ router.get('/:id', async (request, response) => {
       });
     }
     return response.json({
+      error: false,
       status: 200,
       message: "Get data child succesfully",
       data: dataResponse.data,
