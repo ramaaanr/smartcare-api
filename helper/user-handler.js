@@ -3,7 +3,7 @@ const database = require("./database");
 
 async function setUser({ id, username, email }) {
   const data = {
-    child: [],
+    childs: [],
     username,
     email,
   };
@@ -28,7 +28,7 @@ async function updateUserChild({ id, child }) {
   const docRef = doc(database, "users",  id);
   try {
     await updateDoc(docRef, {
-      child: arrayUnion(...child),
+      childs: arrayUnion(...child),
     });
     
     return Promise.resolve({
@@ -46,7 +46,7 @@ async function removeUserChild({ id, child }) {
   const docRef = doc(database, "users",  id);
   try {
     await updateDoc(docRef, {
-      child: arrayRemove(...child),
+      childs: arrayRemove(...child),
     });
     
     return Promise.resolve({

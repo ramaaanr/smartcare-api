@@ -11,7 +11,7 @@ function makePassword(length) {
     return result;
 }
 
-xdescribe('Sign Up Testing', () => {
+describe('Sign Up Testing', () => {
   it('should add data if input is right', async () => {
     const response = await signUpHandler("tester", `tester${+new Date()}@gmail.com`, makePassword(Math.floor((Math.random() * 10) + 6)));
     expect(response).toEqual({
@@ -20,7 +20,7 @@ xdescribe('Sign Up Testing', () => {
   });
 })
 
-xdescribe('Set User', () => {
+describe('Set User', () => {
   it('should succes if response is true with data', async () => {
     const response = await setUser({
       id: `tester${+new Date()}`,

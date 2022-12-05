@@ -8,7 +8,7 @@ describe('User Route Testing', () => {
     expect(data).toEqual({
       data: {
         username: 'tester',
-        child: [ 'baby1', 'baby2' ],     
+        childs: [ 'baby1', 'baby2' ],     
         email: 'tester@gmail.com'        
       },
       error: false,
