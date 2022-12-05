@@ -1,4 +1,4 @@
-const setUser = require("../helper/set-user");
+const { setUser } = require("../helper/user-handler");
 const signUpHandler = require("../helper/sign-up-handler");
 
 function makePassword(length) {

@@ -1,4 +1,4 @@
-const getChild = require("../helper/get-child");
+const { getChild } = require("../helper/child-handler");
 
 describe('Child Route Testing', () => { 
   it('should get data if id is right', async () => {
