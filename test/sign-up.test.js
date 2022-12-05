@@ -27,6 +27,7 @@ describe('Set User', () => {
       username: "tester",
       email: "tester@gmail.com",
     })
+    
 
     expect(response).toEqual({
       "error": false
