@@ -12,13 +12,13 @@ class HealthStatus {
       let status='';
       const ZScore = (this._weight - 12.4)/(12.4-11.0);
       if (ZScore <-3) {
-        status = "Sangat Kurus";
+        status = "sangat-kurus";
       } else if (ZScore > -3 && ZScore < -2) {
-        status = "Kurus";
+        status = "kurus";
       } else if (ZScore > -2 && ZScore < 2) {
-        status = "Normal";
+        status = "normal";
       } else {
-        status = "Gemuk";
+        status = "gemuk";
       }
       return status;
     }
@@ -27,13 +27,13 @@ class HealthStatus {
       let status='';
       const ZScore = (this._height - 88.0)/(88.0-84.09);
       if (ZScore <-3) {
-        status = "Sangat Pendek";
+        status = "sangat-pendek";
       } else if (ZScore > -3 && ZScore < -2) {
-        status = "Pendek";
+        status = "pendek";
       } else if (ZScore > -2 && ZScore < 2) {
-        status = "Normal";
+        status = "normal";
       } else {
-        status = "Tinggi";
+        status = "tinggi";
       }
       return status;
     }
@@ -42,11 +42,11 @@ class HealthStatus {
       let status='';
       const ZScore = (this._headLength - 88.0)/(88.0-84.09);
       if (ZScore >= -2) {
-        status = "Makrosefali";
+        status = "makrosefali";
       } else if (ZScore > -2 && ZScore < 2) {
-        status = "Normal";
+        status = "normal";
       } else {
-        status = "Mikrosefali";
+        status = "mikrosefali";
       }
       return status;
     }
