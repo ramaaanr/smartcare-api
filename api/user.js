@@ -28,7 +28,7 @@ router.get('/:id', async (request, response) => {
       })}
 });
 
-router.put('/add-child/:id', async (request, response) => {
+router.post('/add-child/:id', async (request, response) => {
   try {
     const childData = await setChild(request.body)
     if (childData.error) {
