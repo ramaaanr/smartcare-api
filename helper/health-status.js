@@ -12,13 +12,13 @@ class HealthStatus {
       let status='';
       const ZScore = (this._weight - 12.4)/(12.4-11.0);
       if (ZScore <-3) {
-        status = "Gizi Buruk";
+        status = "Sangat Kurus";
       } else if (ZScore > -3 && ZScore < -2) {
-        status = "Gizi Kurang";
+        status = "Kurus";
       } else if (ZScore > -2 && ZScore < 2) {
-        status = "Gizi Baik";
+        status = "Normal";
       } else {
-        status = "Gizi Lebih";
+        status = "Gemuk";
       }
       return status;
     }
