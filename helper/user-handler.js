@@ -28,7 +28,7 @@ async function updateUserChild({ id, child }) {
   const docRef = doc(database, "users",  id);
   try {
     await updateDoc(docRef, {
-      childs: arrayUnion(...child),
+      childs: arrayUnion(child),
     });
     
     return Promise.resolve({
@@ -46,7 +46,7 @@ async function removeUserChild({ id, child }) {
   const docRef = doc(database, "users",  id);
   try {
     await updateDoc(docRef, {
-      childs: arrayRemove(...child),
+      childs: arrayRemove(child),
     });
     
     return Promise.resolve({

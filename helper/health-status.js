@@ -38,43 +38,27 @@ class HealthStatus {
       return status;
     }
 
-    const weightPerHeight = () => {
+    const headlengthPerAge = () => {
       let status='';
-      const ZScore = (this._weight - 9.7)/(9.7 - 9.0);
-      if (ZScore <-3) {
-        status = "Sangat Kurus";
-      } else if (ZScore > -3 && ZScore < -2) {
-        status = "Kurus";
+      const ZScore = (this._headLength - 88.0)/(88.0-84.09);
+      if (ZScore >= -2) {
+        status = "Makrosefali";
       } else if (ZScore > -2 && ZScore < 2) {
         status = "Normal";
       } else {
-        status = "Gemuk";
+        status = "Mikrosefali";
       }
       return status;
     }
 
-    const bodyMassIndex = () => {
-      let status='';
-      const BMI = this._weight/(this._height * this._height);
-      const ZScore = (BMI - 16.0)/(16.0 - 14.8);
-      if (ZScore <-3) {
-        status = "Sangat Kurus";
-      } else if (ZScore > -3 && ZScore < -2) {
-        status = "Kurus";
-      } else if (ZScore > -2 && ZScore < 2) {
-        status = "Normal";
-      } else {
-        status = "Gemuk";
-      }
-      return status;
-    }
+
 
     return {
-      "BB/U": weightPerAge(),
-      "PB/U": heigtPerAge(),
-      "BB/PB": weightPerHeight(),
-      "IMT": bodyMassIndex(),
+      "weightPerAge": weightPerAge(),
+      "heightPerAge": heigtPerAge(),
+      "headlengthPerAge": headlengthPerAge(),
     }
+
   } else {
     const BMI = this._weight/(this._height * this._height);
     let status = '';

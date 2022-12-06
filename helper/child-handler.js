@@ -7,7 +7,7 @@ async function setChild(childData) {
   const healthStatus = new HealthStatus({ age, height, weight, headLength });
   const data = {
     healthStatus: {
-      growth: healthStatus.calculateGrowth(),
+      ...healthStatus.calculateGrowth(),
       development: '',
     },
     ...childData,
@@ -23,7 +23,7 @@ async function setChild(childData) {
 
     return Promise.resolve({
       error: false,
-      data: responseChildData.data,
+      data: {id, ...responseChildData.data},
     });
   } catch (error) {
     return Promise.reject({

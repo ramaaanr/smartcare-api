@@ -1,4 +1,5 @@
 const express = require('express');
+const { setChild } = require('../helper/child-handler');
 const { getUser, updateUserChild, removeUserChild } = require('../helper/user-handler');
 
 const router = express.Router();
@@ -29,7 +30,16 @@ router.get('/:id', async (request, response) => {
 
 router.put('/add-child/:id', async (request, response) => {
   try {
-    const userResponse = await updateUserChild({id: request.params.id, child: request.body.child});
+    const childData = await setChild(request.body)
+    if (childData.error) {
+      return response.json({
+        error: true,
+        status: 401,
+        message: userResponse.message,
+      })
+    }
+
+    const userResponse = await updateUserChild({id: request.params.id, child: childData.data.id});
     if (userResponse.error) {
       return response.json({
         error: true,
@@ -41,7 +51,7 @@ router.put('/add-child/:id', async (request, response) => {
       error: false,
       status: 200,
       message: "Update user child succesfully",
-      data: userResponse.data,
+      data: childData.data,
     });
   } catch (error) {
       return response.json({
