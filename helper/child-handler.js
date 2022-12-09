@@ -1,4 +1,4 @@
-const { doc, getDoc, setDoc, updateDoc } = require("firebase/firestore");
+const { doc, getDoc, setDoc, updateDoc, deleteDoc } = require("firebase/firestore");
 const database = require("./database");
 const HealthStatus = require("./health-status");
 
@@ -114,4 +114,19 @@ async function getChild({ id }) {
   }
 }
 
-module.exports = { getChild, setChild, updateChild, updateChildDevelopment };
+async function deleteChild({ id }) {
+  const docRef = doc(database, "childs", id );
+  try {
+    await deleteDoc(docRef);
+    return Promise.resolve({
+      error: false,
+    });
+  } catch (error) {
+    return Promise.reject({
+      error: true,
+      message: error.message,
+    });
+  }
+}
+
+module.exports = { deleteChild, getChild, setChild, updateChild, updateChildDevelopment };

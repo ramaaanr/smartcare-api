@@ -1,4 +1,5 @@
 const { doc, setDoc, getDoc, updateDoc, arrayUnion, arrayRemove} = require("firebase/firestore");
+const { deleteChild } = require("./child-handler");
 const database = require("./database");
 
 async function setUser({ id, username, email }) {
@@ -45,6 +46,7 @@ async function removeUserChild({ id, child }) {
 
   const docRef = doc(database, "users",  id);
   try {
+    await deleteChild({id: child});
     await updateDoc(docRef, {
       childs: arrayRemove(child),
     });

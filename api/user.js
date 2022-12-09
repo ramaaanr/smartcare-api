@@ -61,9 +61,9 @@ router.post('/add-child/:id', async (request, response) => {
       })}
 });
 
-router.put('/remove-child/:id', async (request, response) => {
+router.delete('/remove-child', async (request, response) => {
   try {
-    const userResponse = await removeUserChild({id: request.params.id, child: request.body.child});
+    const userResponse = await removeUserChild({id: request.body.id, child: request.body.child});
     if (userResponse.error) {
       return response.json({
         error: true,
