@@ -39,11 +39,11 @@ async function getDevelopmentSurvey({ age }) {
           SOSIALISASI_DAN_KEMANDIRIAN,
           GERAK_HALUS,
           GERAK_KASAR,
-          key
+          status
         } = docSnap.data();
 
         const survey = {
-          key,
+          status,
           BICARA_DAN_BAHASA: BICARA_DAN_BAHASA.survey,
           SOSIALISASI_DAN_KEMANDIRIAN: SOSIALISASI_DAN_KEMANDIRIAN.survey,
           GERAK_HALUS: GERAK_HALUS.survey,
