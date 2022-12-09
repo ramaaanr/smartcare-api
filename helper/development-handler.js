@@ -2,6 +2,7 @@ const { doc, getDoc, } = require("firebase/firestore");
 const getAgeRange = require("./age-range");
 const { updateChildDevelopment } = require("./child-handler");
 const database = require("./database");
+const feedback = require("./feedback");
 const HealthStatus = require("./health-status");
 
 async function getDevelopment({ageRange}) {
@@ -91,6 +92,7 @@ async function setDevelopment({ id, age, answer }) {
     const developmentData = {
       result: developmentResult.result,
       stimulation: stimulationFeedback,
+      feedback: feedback[developmentResult.result]
     }
 
     const { error } = await updateChildDevelopment({id, developmentData})

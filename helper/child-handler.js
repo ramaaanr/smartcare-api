@@ -8,7 +8,11 @@ async function setChild(childData) {
   const data = {
     healthStatus: {
       ...healthStatus.calculateGrowth(),
-      development: '',
+      development: {
+        result: 'belum-dimuat',
+        feedback: '',
+        stimulation: '',
+      },
     },
     ...childData,
   };
