@@ -64,6 +64,30 @@ async function updateChild(id, childData) {
 };
 
 
+async function updateChildDevelopment({id, developmentData}) {
+  const { data:prevData } = await getChild({ id });
+  const docRef = doc(database, "childs",  id);
+  try {
+    await updateDoc(docRef, {
+      
+      healthStatus: {
+        ...prevData.healthStatus,
+        development: { ...developmentData },
+      }
+    });
+    
+    return Promise.resolve({
+      error: false
+    });
+  } catch (error) {
+    return Promise.reject({
+      error: true,
+      message: error.message,
+    });
+  }
+};
+
+
 async function getChild({ id }) {
   const docRef = doc(database, "childs", id );
   try {
@@ -86,4 +110,4 @@ async function getChild({ id }) {
   }
 }
 
-module.exports = { getChild, setChild, updateChild };
+module.exports = { getChild, setChild, updateChild, updateChildDevelopment };

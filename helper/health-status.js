@@ -1,5 +1,5 @@
 class HealthStatus {
-  constructor({ age, weight, height, headLength }) {
+  constructor({ age, weight = 0, height = 0, headLength = 0 }) {
     this._age = age;
     this._weight = weight;
     this._height = height;
@@ -78,6 +78,35 @@ class HealthStatus {
     }
   }
 }
+  calculateDevelopment({ answer, key }) {
+    const keyDetail = [
+      'BICARA_DAN_BAHASA',
+      'GERAK_HALUS',
+      'GERAK_KASAR',
+      'SOSIALISASI_DAN_KEMANDIRIAN',
+    ];
+    let result;
+    let point = 0;
+    let stimulations = [];
+    // const point = answer.reduce((prev, current) => prev + current, 0);
+    answer.forEach((value, index) => {
+      point += value;
+      if(key[index]/2 >= value) {
+        stimulations.push(keyDetail[index]);
+      }
+    });
+    if (point > 8) {
+      result = 'memuaskan';
+    } else if (point > 6) {
+      result = 'meragukan';
+    } else {
+      result = 'menyimpang';
+    }
+    return {
+      result,
+      stimulations,
+    }
+  }
 }
 
 module.exports = HealthStatus;

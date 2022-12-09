@@ -6,8 +6,7 @@ const router = express.Router();
 router.get('/:measurement/:status', async (request, response) => {
   const measurement = request.params.measurement;
   const status = request.params.status;
-  console.log(measurement);
-  console.log(status);
+ 
   try {
     const dataResponse = await getGrowthFeedback({measurement, status});
     if (dataResponse.error) {
