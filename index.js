@@ -8,6 +8,7 @@ const user = require('./api/user');
 const child = require('./api/child');
 const growth = require('./api/growth');
 const development = require('./api/development');
+const article = require('./api/article');
 
 const app = express();
 
@@ -25,5 +26,6 @@ app.use("/api/user/", user);
 app.use("/api/child/", child);
 app.use("/api/growth/", growth);
 app.use("/api/development", development);
+app.use("/api/article", article);
 
 app.listen(PORT, () => console.log(`Server is running in port ${PORT}`));
