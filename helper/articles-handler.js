@@ -10,9 +10,12 @@ async function getArticles() {
         error: true,
       });
     } 
+
+    const { data } = docSnap.data();
+    
     return Promise.resolve({
       error: false,
-      data: docSnap.data(),
+      data,
     });
   } catch (error) {
     return Promise.reject({
