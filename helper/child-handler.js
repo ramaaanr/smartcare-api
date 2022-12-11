@@ -57,7 +57,7 @@ async function updateChild(id, childData) {
   const data = {
     ...childData,
     healthStatus: {
-      growth: healthCalc.calculateGrowth(),
+      ...healthCalc.calculateGrowth(),
       development: healthStatus.development,
     },
   };
