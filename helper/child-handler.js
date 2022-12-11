@@ -3,8 +3,8 @@ const database = require("./database");
 const HealthStatus = require("./health-status");
 
 async function setChild(childData) {
-  const { age, height, weight, headLength } = childData;
-  const healthStatus = new HealthStatus({ age, height, weight, headLength });
+  const { age, height, weight, headLength, gender } = childData;
+  const healthStatus = new HealthStatus({ age, height, weight, headLength, gender });
   const data = {
     healthStatus: {
       ...healthStatus.calculateGrowth(),
@@ -38,8 +38,8 @@ async function setChild(childData) {
 };
 
 async function updateChild(id, childData) {
-  const { age, height, weight, headLength } = childData;
-  const healthStatus = new HealthStatus({ age, height, weight, headLength });
+  const { age, height, weight, headLength, gender } = childData;
+  const healthStatus = new HealthStatus({ age, height, weight, headLength, gender });
   const data = {
     healthStatus: {
       growth: healthStatus.calculateGrowth(),

@@ -1,16 +1,20 @@
+const { getWeightStandard, getHeightStandard, getHeadlengthStandard, getHeadlengthPercentile } = require("./calculate-standard");
+
 class HealthStatus {
-  constructor({ age, weight = 0, height = 0, headLength = 0 }) {
+  constructor({ age, weight = 0, height = 0, headLength = 0, gender= "laki-laki" }) {
     this._age = age;
     this._weight = weight;
     this._height = height;
     this._headLength = headLength;
+    this._gender = gender;
   };
 
   calculateGrowth() {
   if (this._age <= 60) {
     const weightPerAge = () => {
       let status='';
-      const ZScore = (this._weight - 12.4)/(12.4-11.0);
+      const {median, SD} = getWeightStandard(this._age, this._weight);
+      const ZScore = (this._weight - median)/(median-SD);
       if (ZScore <-3) {
         status = "sangat-kurus";
       } else if (ZScore > -3 && ZScore < -2) {
@@ -25,7 +29,8 @@ class HealthStatus {
 
     const heigtPerAge = () => {
       let status='';
-      const ZScore = (this._height - 88.0)/(88.0-84.09);
+      const { median, SD } = getHeightStandard(this._age, this._height);
+      const ZScore = (this._height - median)/(median-SD);
       if (ZScore <-3) {
         status = "sangat-pendek";
       } else if (ZScore > -3 && ZScore < -2) {
@@ -40,10 +45,13 @@ class HealthStatus {
 
     const headlengthPerAge = () => {
       let status='';
-      const ZScore = (this._headLength - 88.0)/(88.0-84.09);
-      if (ZScore >= -2) {
+      const { power, median, variation } = getHeadlengthStandard({age: this._age, gender: this._gender});
+      const ZScore = (Math.pow((this._headLength/median), power) - 1) / (power * variation);
+      const percentile = getHeadlengthPercentile(ZScore);
+
+      if (percentile >= 98) {
         status = "makrosefali";
-      } else if (ZScore > -2 && ZScore < 2) {
+      } else if (percentile > 2 && percentile < 98) {
         status = "normal";
       } else {
         status = "mikrosefali";
