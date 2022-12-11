@@ -31,11 +31,12 @@ class HealthStatus {
       let status='';
       const { median, SD } = getHeightStandard(this._age, this._height);
       const ZScore = (this._height - median)/(median-SD);
+      console.log(ZScore);
       if (ZScore <-3) {
         status = "sangat-pendek";
-      } else if (ZScore > -3 && ZScore < -2) {
+      } else if (ZScore >= -3 && ZScore < -2) {
         status = "pendek";
-      } else if (ZScore > -2 && ZScore < 2) {
+      } else if (ZScore >= -2 && ZScore < 2) {
         status = "normal";
       } else {
         status = "tinggi";

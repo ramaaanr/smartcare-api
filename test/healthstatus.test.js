@@ -1,8 +1,12 @@
 const HealthStatus = require("../helper/health-status")
 
 describe('Growth Status Testing', () => {
-  const healthCalc = new HealthStatus({ age: 2, weight: 4.3, height: 51, headLength: 40, gender: "laki-laki" });
+  const healthCalc = new HealthStatus({ age: 5, weight: 8, height: 65, headLength: 45, gender: "laki-laki" });
   fit('headlength testing',() => {
-    console.log(healthCalc.calculateGrowth());
+    expect(healthCalc.calculateGrowth()).toEqual({
+      weightPerAge: 'normal',
+      heightPerAge: 'normal',
+      headlengthPerAge: 'normal'
+    })
   });
 })
