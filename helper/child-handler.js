@@ -2,9 +2,20 @@ const { doc, getDoc, setDoc, updateDoc, deleteDoc } = require("firebase/firestor
 const database = require("./database");
 const HealthStatus = require("./health-status");
 
+
+function makeId() {
+    let result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < 10; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
 async function setChild(childData) {
-  const { age, height, weight, headLength, gender } = childData;
-  const healthStatus = new HealthStatus({ age, height, weight, headLength, gender });
+  const { age, height, weight, headlength, gender } = childData;
+  const healthStatus = new HealthStatus({ age, height, weight, headlength, gender });
   const data = {
     healthStatus: {
       ...healthStatus.calculateGrowth(),
@@ -17,7 +28,7 @@ async function setChild(childData) {
     ...childData,
   };
   
-  const id = `c${+new Date()}`;
+  const id = makeId();
 
   const docRef = doc(database, "childs", id );
   try {
@@ -38,8 +49,11 @@ async function setChild(childData) {
 };
 
 async function updateChild(id, childData) {
-  const { age, height, weight, headLength, gender } = childData;
-  const healthStatus = new HealthStatus({ age, height, weight, headLength, gender });
+  const { age, height, weight, headlength, gender } = childData;
+  console.log({
+    age, height, weight, headlength, gender
+  });
+  const healthStatus = new HealthStatus({ age, height, weight, headlength, gender });
   const data = {
     healthStatus: {
       growth: healthStatus.calculateGrowth(),

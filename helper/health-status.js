@@ -1,11 +1,11 @@
 const { getWeightStandard, getHeightStandard, getHeadlengthStandard, getHeadlengthPercentile } = require("./calculate-standard");
 
 class HealthStatus {
-  constructor({ age, weight = 0, height = 0, headLength = 0, gender= "laki-laki" }) {
+  constructor({ age, weight = 0, height = 0, headlength = 0, gender= "laki-laki" }) {
     this._age = age;
     this._weight = weight;
     this._height = height;
-    this._headLength = headLength;
+    this._headlength = headlength;
     this._gender = gender;
   };
 
@@ -47,9 +47,17 @@ class HealthStatus {
     const headlengthPerAge = () => {
       let status='';
       const { power, median, variation } = getHeadlengthStandard({age: this._age, gender: this._gender});
-      const ZScore = (Math.pow((this._headLength/median), power) - 1) / (power * variation);
+      const ZScore = (Math.pow((this._headlength/median), power) - 1) / (power * variation);
       const percentile = getHeadlengthPercentile(ZScore);
-
+      console.log({
+        age: this._age,
+        headlength: this._headlength,
+        power,
+        median,
+        variation,
+        ZScore,
+        percentile
+      });
       if (percentile >= 98) {
         status = "makrosefali";
       } else if (percentile > 2 && percentile < 98) {
