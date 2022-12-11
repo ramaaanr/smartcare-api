@@ -20,15 +20,10 @@ function getWeightStandard(age, weight) {
 function getHeightStandard(age, height) {
   const { minusSD, median, plusSD} = heightStandard[age-1];
   if (height < median) {
-    return {
-      median,
-      SD: minusSD,
-    }
+      return (height - median)/(median-minusSD);
   }
-  return {
-    median,
-    SD: plusSD,
-  }
+  return (height - median)/(minusSD + plusSD);
+
 };
 
 function getHeadlengthStandard({age, gender}) {

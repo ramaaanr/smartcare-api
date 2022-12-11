@@ -7,7 +7,7 @@ function makeId() {
     let result           = '';
     var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
-    for ( var i = 0; i < 10; i++ ) {
+    for ( var i = 0; i < 15; i++ ) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
@@ -49,17 +49,17 @@ async function setChild(childData) {
 };
 
 async function updateChild(id, childData) {
-  const { age, height, weight, headlength, gender } = childData;
+  const { age, height, weight, headlength, gender, healthStatus } = childData;
   console.log({
     age, height, weight, headlength, gender
   });
-  const healthStatus = new HealthStatus({ age, height, weight, headlength, gender });
+  const healthCalc = new HealthStatus({ age, height, weight, headlength, gender });
   const data = {
-    healthStatus: {
-      growth: healthStatus.calculateGrowth(),
-      development: '',
-    },
     ...childData,
+    healthStatus: {
+      growth: healthCalc.calculateGrowth(),
+      development: healthStatus.development,
+    },
   };
   
 

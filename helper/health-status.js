@@ -29,9 +29,12 @@ class HealthStatus {
 
     const heigtPerAge = () => {
       let status='';
-      const { median, SD } = getHeightStandard(this._age, this._height);
-      const ZScore = (this._height - median)/(median-SD);
-      console.log(ZScore);
+      const ZScore = getHeightStandard(this._age, this._height);
+      console.log({
+        height: this._height,
+        age: this._age,
+        ZScore,
+      });
       if (ZScore <-3) {
         status = "sangat-pendek";
       } else if (ZScore >= -3 && ZScore < -2) {
@@ -49,15 +52,6 @@ class HealthStatus {
       const { power, median, variation } = getHeadlengthStandard({age: this._age, gender: this._gender});
       const ZScore = (Math.pow((this._headlength/median), power) - 1) / (power * variation);
       const percentile = getHeadlengthPercentile(ZScore);
-      console.log({
-        age: this._age,
-        headlength: this._headlength,
-        power,
-        median,
-        variation,
-        ZScore,
-        percentile
-      });
       if (percentile >= 98) {
         status = "makrosefali";
       } else if (percentile > 2 && percentile < 98) {
